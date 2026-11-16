@@ -1,0 +1,28 @@
+public class CamionDeCarga extends VehiculoTransporte {
+    private double combustibleActual;
+    private double pesoCarga;
+
+    public CamionDeCarga(double combustibleActual, double pesoCarga) {
+        super("Camion de Carga");
+        this.combustibleActual = combustibleActual;
+        this.pesoCarga = pesoCarga;
+    }
+
+    @Override
+    public void calcularConsumo(double km) {
+        double porcentajePorKm;
+
+        if (pesoCarga <= 0) {
+            porcentajePorKm = 10;
+        } else if (pesoCarga <= 150) {
+            porcentajePorKm = 15;
+        } else {
+            porcentajePorKm = 20;
+        }
+
+        double consumoTotal = km * porcentajePorKm;
+        combustibleActual -= consumoTotal;
+        
+        System.out.println("[" + nombre + " con carga de " + pesoCarga + " kg] Recorrio " + km + " km (" + porcentajePorKm + "% por km). Consumo total: " + consumoTotal + "%. Combustible restante: " + Math.max(0, combustibleActual) + "%");
+    }
+}
